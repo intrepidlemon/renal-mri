@@ -1,6 +1,7 @@
 import os
 import logging
 
+DATA_DIR = os.environ["DATA_DIR"]
 
 class Config(object):
     IMAGE_SIZE = 200
@@ -21,19 +22,21 @@ class Config(object):
     SECRET = "example secret key"
     LOG_LEVEL = logging.DEBUG
 
-    RAW_NRRD_ROOT = "/media/external-hd-1/renal-tumor/dicom/"
+
+    RAW_NRRD_ROOT = os.path.join(DATA_DIR, "dicom")
+
     RAW_FEATURES = [
-        "/media/external-hd-1/renal-tumor/features/20190801/pathology.csv",
-        "/media/external-hd-1/renal-tumor/features/20190801/usable.csv",
-        "/media/external-hd-1/renal-tumor/features/20190801/clinical.csv",
-        "/media/external-hd-1/renal-tumor/features/20190801/outcomes.csv",
-        "/media/external-hd-1/renal-tumor/features/20190801/sort.csv",
-        ]
+	os.path.join(DATA_DIR, "features", "pathology.csv"),
+	os.path.join(DATA_DIR, "features", "usable.csv"),
+	os.path.join(DATA_DIR, "features", "clinical.csv"),
+	os.path.join(DATA_DIR, "features", "outcomes.csv"),
+	os.path.join(DATA_DIR, "features", "sort.csv"),
+    ]
 
-    EXPERTS = "/media/external-hd-1/renal-tumor/features/20190801/experts.csv"
+    EXPERTS = os.path.join(DATA_DIR, "features", "experts.csv"),
 
-    DATA = "/media/external-hd-1/renal"
-    PREPROCESSED_DIR = os.path.join(DATA, "20190905-preprocessed")
+    DATA = DATA_DIR
+    PREPROCESSED_DIR = os.path.join(DATA, "preprocessed")
     TRAIN_DIR = os.path.join(DATA, "train")
     TEST_DIR = os.path.join(DATA, "test")
     VALIDATION_DIR = os.path.join(DATA, "validation")
@@ -45,7 +48,7 @@ class Config(object):
 
     INPUT_FORM = "all"
 
-    OUTPUT = "/media/external-hd-1/renal/output"
+    OUTPUT = os.path.join(DATA, "output")
     DB_URL = "sqlite:///{}/results.db".format(OUTPUT)
     MODEL_DIR = os.path.join(OUTPUT, "models")
     STDOUT_DIR = os.path.join(OUTPUT, "stdout")
