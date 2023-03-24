@@ -29,7 +29,7 @@ ipython = "*"
 tensorflow = "==1.12.2"
 papermill = "==0.9"
 efficientnet = "*"
-tensorflow-gpu = "==1.13.1"
+tensorflow-gpu = "==2.12.0"
 
 [dev-packages]
 
